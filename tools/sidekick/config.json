@@ -1,5 +1,6 @@
 {
-  "project": "Frescopa",
+  "project": "Frescopa EMEA",
+  "host": "emea.frescopa.coffee",
   "editUrlLabel": "AEM Editor",
   "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open",
   "plugins": [
