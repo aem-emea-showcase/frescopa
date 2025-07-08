@@ -1,0 +1,24 @@
+name: Sync Upstream (keep local config)
+
+on:
+  workflow_dispatch:          # manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out your fork, full history
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # 2. Back up your local config
+      - name: Backup local config
+        run: |
+          mkdir -p backup
+          cp fstab.yaml backup/fstab.yaml
+          cp scripts/endpointconfig.js backup/scripts/endpointconfig.js
+          cp sitemap-index.xml backup/sitemap-index.xml
+          cp tools/sidekick/config.json backup/tools/sidekick/config.json
