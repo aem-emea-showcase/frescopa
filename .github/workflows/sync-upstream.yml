@@ -11,6 +11,9 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       #0. Set the git config
       - name: Set Git identity
