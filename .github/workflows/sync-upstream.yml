@@ -13,6 +13,7 @@ jobs:
 
     steps:
       #0. Set the git config
+      - name: Set Git identity
         run: |
           git config --global credential.helper cache
           git config --global user.email ${USER_EMAIL}
