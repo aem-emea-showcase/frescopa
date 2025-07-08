@@ -22,3 +22,35 @@ jobs:
           cp scripts/endpointconfig.js backup/endpointconfig.js
           cp sitemap-index.xml backup/sitemap-index.xml
           cp tools/sidekick/config.json backup/config.json
+
+      # 3. Add the upstream remote and fetch it
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/aem-showcase/frescopa.git
+          git fetch upstream
+
+      # 4. Merge upstream/main into your main (or master)
+      - name: Merge upstream changes
+        run: |
+          git checkout main
+          git merge upstream/main --no-ff --no-edit
+
+      # 5. Restore your backed-up config.json
+      - name: Restore config.json
+        run: |
+          mv backup/fstab.yaml fstab.yaml
+          mv backup/endpointconfig.js scripts/endpointconfig.js 
+          mv backup/sitemap-index.xml sitemap-index.xml 
+          mv backup/config.json tools/sidekick/config.json 
+
+      # 6. Commit & push any merge commits (only if there are real updates)
+      - name: Commit & push
+        run: |
+          git diff --exit-code || ( \
+            git add fstab.yaml && \
+            git add scripts/endpointconfig.js  && \
+            git add sitemap-index.xml  && \
+            git add tools/sidekick/config.json  && \
+            git commit -m "chore: sync with upstream, preserve local config" && \
+            git push origin main \
+          )
