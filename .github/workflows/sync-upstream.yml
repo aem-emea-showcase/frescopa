@@ -3,11 +3,21 @@ name: Sync Upstream (keep local config)
 on:
   workflow_dispatch:          # manual trigger
 
+env:
+  USER_NAME: Mark Szulc
+  USER_EMAIL: mszulc@adobe.com
+  
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
+      #0. Set the git config
+        run: |
+          git config --global credential.helper cache
+          git config --global user.email ${USER_EMAIL}
+          git config --global user.name ${USER_NAME}
+
       # 1. Check out your fork, full history
       - name: Checkout
         uses: actions/checkout@v3
