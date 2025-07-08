@@ -19,6 +19,6 @@ jobs:
         run: |
           mkdir -p backup
           cp fstab.yaml backup/fstab.yaml
-          cp scripts/endpointconfig.js backup/scripts/endpointconfig.js
+          cp scripts/endpointconfig.js backup/endpointconfig.js
           cp sitemap-index.xml backup/sitemap-index.xml
-          cp tools/sidekick/config.json backup/tools/sidekick/config.json
+          cp tools/sidekick/config.json backup/config.json
